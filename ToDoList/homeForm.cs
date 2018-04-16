@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToDoList;
 
 namespace ToDoList
 {
@@ -19,22 +20,16 @@ namespace ToDoList
             InitializeComponent();
         }
 
-        private void todoList_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void btnAdd_Click(object sender, EventArgs e)
         {
 
-        }
+            myToDoList.AddTaskToList(txtDescription.Text);
+            clbToDoList.Items.Add(txtDescription.Text);
+            txtDescription.Clear();
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-         
-            myToDoList.AddTaskToList();
-            foreach (Task task in myToDoList.Tasks)
-            {
-                MessageBox.Show(task.Description);
-                clbToDoList.Items.Add(task.Description);
-                //checkBoxList.DisplayMember = "name";
-                //checkBoxList.ValueMember = "enabled";
-            }
+
         }
 
         void PopulateTodoList()
@@ -46,5 +41,26 @@ namespace ToDoList
         {
             PopulateTodoList();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSaveList_Click(object sender, EventArgs e)
+        {
+            bool success = myToDoList.SaveTaskList();
+        }
+
+
+        private void todoList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked)
+            {
+                // find the proper task in myToDoList and update it.  Syntax for get an item from a list
+                myToDoList.MarkTaskAsDone(e.Index);
+            }
+        }
+
     }
 }

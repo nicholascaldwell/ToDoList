@@ -5,15 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static ToDoList.ToDoList;
+using System.IO;
+using System.Diagnostics;
+using System.Windows.Forms;  // remove after debugging
 
 namespace ToDoList
 {
     // Interface CreateTask
     // Interface SaveList
-    public interface IToDoList
+    public interface IToDoListFunctions
     {
        // bool SaveTaskList();   // move to UI interface
-        bool AddTaskToList();
+        bool AddTaskToList(string value);
+
+        bool SaveTaskList();
+
+        bool MarkTaskAsDone(int index);
 
     }
 
@@ -27,21 +34,36 @@ namespace ToDoList
 
 
 
-    public class ToDoList : IToDoList
+    public class ToDoList : IToDoListFunctions
     {
         public List<Task> Tasks = new List<Task>();
 
         public bool SaveTaskList()
         {
+            
+            using (TextWriter TW = new StreamWriter("ToDoList.txt"))
+            {
+                foreach (Task task in Tasks)
+                {
+                    TW.WriteLine(task.IsDone + "," + task.Description);
+                }
+            }
+            Process.Start("ToDoList.txt");
             return false;
         }
 
-        public bool AddTaskToList()
+        public bool AddTaskToList(string description)
         {
             Task newTask = new Task();
-            newTask.Description = "New task";
+            newTask.Description = description;
             newTask.IsDone = false;
             Tasks.Add(newTask);
+            return true;
+        }
+
+        public bool MarkTaskAsDone(int index)
+        {
+            Tasks[index].IsDone = true;
             return true;
         }
 
