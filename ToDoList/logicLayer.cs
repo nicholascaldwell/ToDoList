@@ -22,6 +22,7 @@ namespace ToDoList
 
         bool MarkTaskAsDone(int index);
 
+        bool LoadTaskList();
     }
 
     public class Task
@@ -38,19 +39,7 @@ namespace ToDoList
     {
         public List<Task> Tasks = new List<Task>();
 
-        public bool SaveTaskList()
-        {
-            
-            using (TextWriter TW = new StreamWriter("ToDoList.txt"))
-            {
-                foreach (Task task in Tasks)
-                {
-                    TW.WriteLine(task.IsDone + "," + task.Description);
-                }
-            }
-            Process.Start("ToDoList.txt");
-            return false;
-        }
+
 
         public bool AddTaskToList(string description)
         {
@@ -67,5 +56,40 @@ namespace ToDoList
             return true;
         }
 
+
+        public bool SaveTaskList()
+        {
+
+            using (TextWriter TW = new StreamWriter("ToDoList.txt"))
+            {
+                foreach (Task task in Tasks)
+                {
+                    TW.WriteLine(task.IsDone + "," + task.Description);
+                }
+            }
+            Process.Start("ToDoList.txt");
+            return false;
+        }
+
+
+        public bool LoadTaskList()
+        {
+            StreamReader file = new StreamReader(@"ToDoList.txt");
+            int counter = 0;
+            string line;
+
+            while ((line = file.ReadLine()) != null)
+            {
+                System.Console.WriteLine(line);
+                counter++;
+            }
+
+            file.Close();
+            System.Console.WriteLine("There were {0} lines.", counter);
+            // Suspend the screen.  
+            System.Console.ReadLine();
+            return true;
+
+        }
     }
 }

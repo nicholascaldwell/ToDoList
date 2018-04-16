@@ -24,12 +24,9 @@ namespace ToDoList
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
             myToDoList.AddTaskToList(txtDescription.Text);
             clbToDoList.Items.Add(txtDescription.Text);
             txtDescription.Clear();
-
-
         }
 
         void PopulateTodoList()
@@ -63,5 +60,9 @@ namespace ToDoList
             }
         }
 
+        private void btnLoadList_Click(object sender, EventArgs e)
+        {
+            myToDoList.LoadTaskList();
+        }
     }
 }

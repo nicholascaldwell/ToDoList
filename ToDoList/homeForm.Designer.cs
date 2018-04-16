@@ -36,6 +36,7 @@ namespace ToDoList
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSaveList = new System.Windows.Forms.Button();
+            this.btnLoadList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // clbToDoList
@@ -87,11 +88,22 @@ namespace ToDoList
             this.btnSaveList.UseVisualStyleBackColor = true;
             this.btnSaveList.Click += new System.EventHandler(this.btnSaveList_Click);
             // 
+            // btnLoadList
+            // 
+            this.btnLoadList.Location = new System.Drawing.Point(475, 204);
+            this.btnLoadList.Name = "btnLoadList";
+            this.btnLoadList.Size = new System.Drawing.Size(89, 44);
+            this.btnLoadList.TabIndex = 5;
+            this.btnLoadList.Text = "Load List";
+            this.btnLoadList.UseVisualStyleBackColor = true;
+            this.btnLoadList.Click += new System.EventHandler(this.btnLoadList_Click);
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 368);
+            this.Controls.Add(this.btnLoadList);
             this.Controls.Add(this.btnSaveList);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDescription);
@@ -114,6 +126,7 @@ namespace ToDoList
         private TextBox txtDescription;
         private Label label1;
         private Button btnSaveList;
+        private Button btnLoadList;
     }
 }
 
