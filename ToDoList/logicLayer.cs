@@ -12,7 +12,7 @@ namespace ToDoList
     // Interface SaveList
     public interface IToDoList
     {
-        bool SaveTaskList();   // move to UI interface
+       // bool SaveTaskList();   // move to UI interface
         bool AddTaskToList();
 
     }
