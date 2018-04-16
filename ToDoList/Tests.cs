@@ -20,6 +20,8 @@ namespace ToDoList
             };
             String getDescription = task.Description;
             getDescription.ShouldBe("Test");
+            bool status = task.IsDone;
+            status.ShouldBe(false);
         }
 
         [Fact]

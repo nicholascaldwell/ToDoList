@@ -16,7 +16,7 @@ namespace ToDoList
     public interface IToDoListFunctions
     {
        // bool SaveTaskList();   // move to UI interface
-        bool AddTaskToList(string value);
+        bool AddTaskToList(string value, bool status);
 
         bool SaveTaskList();
 
@@ -41,11 +41,11 @@ namespace ToDoList
 
 
 
-        public bool AddTaskToList(string description)
+        public bool AddTaskToList(string description, bool status = false)
         {
             Task newTask = new Task();
+            newTask.IsDone = status;
             newTask.Description = description;
-            newTask.IsDone = false;
             Tasks.Add(newTask);
             return true;
         }
@@ -77,10 +77,27 @@ namespace ToDoList
             StreamReader file = new StreamReader(@"ToDoList.txt");
             int counter = 0;
             string line;
+            string status;
+            bool taskIsDone;
+            string description;
 
             while ((line = file.ReadLine()) != null)
             {
                 System.Console.WriteLine(line);
+                string[] taskElements = line.Split(',');
+                status = taskElements[0];
+                description = taskElements[1];
+                if (status == "False")
+                    { taskIsDone = false;  }
+                else
+                    { taskIsDone = true; }
+                if (taskElements.Length == 2)
+                {
+                    AddTaskToList(description, taskIsDone);
+                }
+                else
+                    MessageBox.Show("There is an error in the ToDoList.txt file.  It is not in the proper format.");
+
                 counter++;
             }
 
