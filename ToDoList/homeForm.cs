@@ -44,7 +44,7 @@ namespace ToDoList
 
         private void label1_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("LabeLClick");
         }
 
         private void btnSaveList_Click(object sender, EventArgs e)
@@ -53,11 +53,12 @@ namespace ToDoList
         }
 
 
-        private void todoList_ItemCheck(object sender, ItemCheckEventArgs e)
+
+        private void todoList_ItemCheck(object sender, System.Windows.Forms.ItemCheckEventArgs e)
         {
             if (e.NewValue == CheckState.Checked)
             {
-                // find the proper task in myToDoList and update it.  Syntax for get an item from a list
+                // find the proper task in myToDoList and update it.
                 myToDoList.MarkTaskAsDone(e.Index);
             }
         }

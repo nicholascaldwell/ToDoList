@@ -40,14 +40,14 @@ namespace ToDoList
             // 
             // clbToDoList
             // 
+            this.clbToDoList.CheckOnClick = true;
             this.clbToDoList.FormattingEnabled = true;
             this.clbToDoList.Location = new System.Drawing.Point(75, 135);
             this.clbToDoList.Margin = new System.Windows.Forms.Padding(2);
             this.clbToDoList.Name = "clbToDoList";
             this.clbToDoList.Size = new System.Drawing.Size(376, 199);
             this.clbToDoList.TabIndex = 0;
-            this.clbToDoList.CheckOnClick = true; //Allows clicking on the list item itself to check the checkbox
-            this.clbToDoList.SelectedIndexChanged += new System.EventHandler(this.todoList_SelectedIndexChanged);
+            this.clbToDoList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.todoList_ItemCheck);
             // 
             // btnAdd
             // 
@@ -104,11 +104,6 @@ namespace ToDoList
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-
-        private void todoList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
