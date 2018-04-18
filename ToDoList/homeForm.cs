@@ -14,6 +14,8 @@ namespace ToDoList
     public partial class HomeForm : Form
     {
         public ToDoList myToDoList { get; set; } = new ToDoList();
+
+        public ListIO myIOHandler = new ListIO();
         
         public HomeForm()
         {
@@ -29,14 +31,15 @@ namespace ToDoList
             txtDescription.Clear();
         }
 
-        void PopulateTodoList()
+        void PopulateTodoList(string description, bool status)
         {
-            //var checkBoxList = (ListBox)clbToDoList;
+            clbToDoList.Items.Add(description, status);
 
         }
         private void HomeForm_Load_1(object sender, EventArgs e)
         {
-            PopulateTodoList();
+            //TODO: Load default list when forms is launched.
+            //PopulateTodoList();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -46,7 +49,7 @@ namespace ToDoList
 
         private void btnSaveList_Click(object sender, EventArgs e)
         {
-            bool success = myToDoList.SaveTaskList();
+            myIOHandler.SaveTaskList(myToDoList.Tasks);
         }
 
 
@@ -55,14 +58,29 @@ namespace ToDoList
         {
             if (e.NewValue == CheckState.Checked)
             {
-                // find the proper task in myToDoList and update it.
                 myToDoList.MarkTaskAsDone(e.Index);
+            }
+            else
+            {
+                myToDoList.MarkTaskAsNotCompleted(e.Index);
             }
         }
 
         private void btnLoadList_Click(object sender, EventArgs e)
         {
-            myToDoList.LoadTaskList();
+            
+            foreach (Task task in myToDoList.Tasks)
+            { 
+                clbToDoList.Items.Remove(task);
+            }
+            clbToDoList.Refresh();
+            myToDoList.Tasks.Clear();
+            myIOHandler.LoadTaskList(myToDoList);
+            foreach (Task task in myToDoList.Tasks)
+            {
+                PopulateTodoList(task.Description, task.IsDone);
+            }
+            
         }
     }
 }

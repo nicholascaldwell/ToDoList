@@ -1,68 +1,32 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ToDoList.ToDoList;
 using System.IO;
 using System.Diagnostics;
-using System.Windows.Forms;  // remove after debugging
+using System.Windows.Forms;  
 
 namespace ToDoList
-{
-    // Interface CreateTask
-    // Interface SaveList
-    public interface IToDoListFunctions
+{ 
+    public interface IListIO
+
     {
-       // bool SaveTaskList();   // move to UI interface
-        bool AddTaskToList(string value, bool status);
+        bool SaveTaskList(List<Task> list);
 
-        bool SaveTaskList();
-
-        bool MarkTaskAsDone(int index);
-
-        bool LoadTaskList();
-    }
-
-    public class Task
-    {
-        public string Description { get; set; }
-
-        public bool IsDone { get; set; }
+        bool LoadTaskList(ToDoList list);
 
     }
 
+    public class ListIO : IListIO
+    { 
 
-
-    public class ToDoList : IToDoListFunctions
-    {
-        public List<Task> Tasks = new List<Task>();
-
-
-
-        public bool AddTaskToList(string description, bool status = false)
-        {
-            Task newTask = new Task();
-            newTask.IsDone = status;
-            newTask.Description = description;
-            Tasks.Add(newTask);
-            return true;
-        }
-
-        public bool MarkTaskAsDone(int index)
-        {
-            Tasks[index].IsDone = true;
-            return true;
-        }
-
-
-        public bool SaveTaskList()
+        public bool SaveTaskList(List<Task> list)
         {
 
             using (TextWriter TW = new StreamWriter("ToDoList.txt"))
             {
-                foreach (Task task in Tasks)
+                foreach (Task task in list)
                 {
                     TW.WriteLine(task.IsDone + "," + task.Description);
                 }
@@ -71,8 +35,7 @@ namespace ToDoList
             return false;
         }
 
-
-        public bool LoadTaskList()
+        public bool LoadTaskList(ToDoList list)
         {
             StreamReader file = new StreamReader(@"ToDoList.txt");
             int counter = 0;
@@ -88,12 +51,12 @@ namespace ToDoList
                 status = taskElements[0];
                 description = taskElements[1];
                 if (status == "False")
-                    { taskIsDone = false;  }
+                { taskIsDone = false; }
                 else
-                    { taskIsDone = true; }
+                { taskIsDone = true; }
                 if (taskElements.Length == 2)
                 {
-                    AddTaskToList(description, taskIsDone);
+                   list.AddTaskToList(description, taskIsDone);
                 }
                 else
                     MessageBox.Show("There is an error in the ToDoList.txt file.  It is not in the proper format.");

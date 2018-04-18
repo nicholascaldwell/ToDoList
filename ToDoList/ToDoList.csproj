@@ -71,7 +71,8 @@
     <Compile Include="homeForm.Designer.cs">
       <DependentUpon>homeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="logicLayer.cs" />
+    <Compile Include="ListFunctions.cs" />
+    <Compile Include="ListIOInterface.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="todoList.cs">
       <SubType>Form</SubType>
