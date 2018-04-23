@@ -41,6 +41,12 @@ namespace ToDoList
             Tasks.Add(newTask);
         }
 
+
+        public void ChangeTaskState (int index, bool state)            {
+            //Tasks[index]
+        }
+
+
         public void MarkTaskAsDone(int index)
         {
             Tasks[index].IsDone = true;

@@ -72,7 +72,7 @@
       <DependentUpon>homeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ListFunctions.cs" />
-    <Compile Include="ListIOInterface.cs" />
+    <Compile Include="ListIOFunctions.cs" />
     <Compile Include="Tests.cs" />
     <Compile Include="todoList.cs">
       <SubType>Form</SubType>

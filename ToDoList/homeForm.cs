@@ -68,10 +68,10 @@ namespace ToDoList
 
         private void btnLoadList_Click(object sender, EventArgs e)
         {
-            
-            foreach (Task task in myToDoList.Tasks)
-            { 
-                clbToDoList.Items.Remove(task);
+            // clear the checkBoxList
+            for (int i = clbToDoList.Items.Count - 1; i >= 0; i--)
+            {
+                clbToDoList.Items.RemoveAt(i);
             }
             clbToDoList.Refresh();
             myToDoList.Tasks.Clear();
