@@ -55,7 +55,7 @@ namespace ToDoList
                     taskIsDone = true;
 
                 if (taskElements.Length == 2)
-                    list.AddTaskToList(description, taskIsDone)
+                    list.AddTaskToList(description, taskIsDone);
                 else
                     MessageBox.Show("There is an error in the ToDoList.txt file.  It is not in the proper format.");
 

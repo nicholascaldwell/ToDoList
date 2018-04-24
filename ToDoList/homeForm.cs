@@ -22,7 +22,14 @@ namespace ToDoList
             InitializeComponent();
         }
 
-
+        private void InitializeForm()
+        {
+            myIOHandler.LoadTaskList(myToDoList);
+            foreach (Task task in myToDoList.Tasks)
+            {
+                PopulateTodoList(task.Description, task.IsDone);
+            }
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -38,8 +45,7 @@ namespace ToDoList
         }
         private void HomeForm_Load_1(object sender, EventArgs e)
         {
-            //TODO: Load default list when forms is launched.
-            //PopulateTodoList();
+            InitializeForm();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -51,9 +57,7 @@ namespace ToDoList
         {
             myIOHandler.SaveTaskList(myToDoList.Tasks);
         }
-
-
-
+        
         private void todoList_ItemCheck(object sender, System.Windows.Forms.ItemCheckEventArgs e)
         {
             if (e.NewValue == CheckState.Checked)
@@ -75,11 +79,7 @@ namespace ToDoList
             }
             clbToDoList.Refresh();
             myToDoList.Tasks.Clear();
-            myIOHandler.LoadTaskList(myToDoList);
-            foreach (Task task in myToDoList.Tasks)
-            {
-                PopulateTodoList(task.Description, task.IsDone);
-            }
+            InitializeForm();
             
         }
     }
